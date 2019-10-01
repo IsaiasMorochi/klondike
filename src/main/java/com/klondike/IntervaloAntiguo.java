@@ -1,5 +1,7 @@
 package com.klondike;
 
+import com.util.GestorIO;
+
 class IntervaloAntiguo {
 
     private double inferior;
@@ -113,5 +115,4 @@ class IntervaloAntiguo {
         intervalo.mostrar();
         new GestorIO().out("Longitud: " + intervalo.longitud());
     }
-
 }

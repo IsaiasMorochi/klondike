@@ -1,6 +1,6 @@
-package com.klondike;
+package com.util;
 
-class Intervalo {
+public class Intervalo {
 
     private double puntoMedio;
 

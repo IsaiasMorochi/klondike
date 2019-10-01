@@ -1,4 +1,6 @@
-package com.klondike;
+package com.tresenraya;
+
+import com.util.GestorIO;
 
 import java.util.Random;
 

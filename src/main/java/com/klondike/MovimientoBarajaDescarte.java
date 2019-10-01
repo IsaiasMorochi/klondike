@@ -20,5 +20,4 @@ class MovimientoBarajaDescarte extends OpcionKlondike {
             }
         }
     }
-
 }

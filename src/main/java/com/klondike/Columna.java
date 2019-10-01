@@ -28,5 +28,4 @@ class Columna extends Mazo {
                         this.cima().siguiente(carta) &&
                         this.cima().distintoColor(carta);
     }
-
 }

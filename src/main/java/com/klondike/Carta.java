@@ -1,5 +1,8 @@
 package com.klondike;
 
+import com.util.GestorIO;
+import com.util.Intervalo;
+
 class Carta {
 
     private int palo;
@@ -113,9 +116,6 @@ class Carta {
             gestorIO.out("\nSon de distinto color? " + parCartas[0].distintoColor(parCartas[1]));
             gestorIO.out("\n");
         }
-
-
     }
-
 }
 

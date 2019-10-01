@@ -1,5 +1,8 @@
 package com.klondike;
 
+import com.util.GestorIO;
+import com.util.Intervalo;
+
 class Menu {
 
     private Opcion[] opciones;
@@ -34,11 +37,11 @@ class Menu {
         int opcion;
         boolean error;
         do {
-            gestorIO.out("\nOpci�n? [1-" + cantidad + "]: ");
+            gestorIO.out("\nOpcion? [1-" + cantidad + "]: ");
             opcion = gestorIO.inInt();
             error = !new Intervalo(1, cantidad).incluye(opcion);
             if (error) {
-                gestorIO.out("Error!!! La opci�n debe ser entre 1 y 9");
+                gestorIO.out("Error!!! La opcion debe ser entre 1 y 9");
             }
         } while (error);
         return opciones[opcion - 1];

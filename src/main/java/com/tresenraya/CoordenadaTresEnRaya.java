@@ -1,4 +1,7 @@
-package com.klondike;
+package com.tresenraya;
+
+import com.util.GestorIO;
+import com.util.Intervalo;
 
 class CoordenadaTresEnRaya extends Coordenada {
 

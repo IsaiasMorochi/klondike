@@ -1,4 +1,4 @@
-package com.klondike;
+package com.util;
 
 import java.util.StringTokenizer;
 
@@ -66,7 +66,6 @@ class Fecha {
 
     public void mostrar() {
         new GestorIO().out(dia + "/" + mes + "/" + año);
-
     }
 
     public String toStringCAS() {

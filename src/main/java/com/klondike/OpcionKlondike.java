@@ -1,5 +1,8 @@
 package com.klondike;
 
+import com.util.GestorIO;
+import com.util.Intervalo;
+
 abstract class OpcionKlondike extends Opcion {
 
     protected Tapete tapete;

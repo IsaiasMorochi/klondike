@@ -1,4 +1,8 @@
-package com.klondike;
+package com.tresenraya;
+
+import com.tresenraya.CoordenadaTresEnRaya;
+import com.tresenraya.Jugador;
+import com.tresenraya.Tablero;
 
 import java.util.Random;
 
@@ -28,5 +32,4 @@ class JugadorAutomatico extends Jugador {
         } while (!tablero.ocupada(resultado, color));
         return resultado;
     }
-
 }

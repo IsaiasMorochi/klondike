@@ -18,5 +18,4 @@ class MovimeintoDescarteBaraja extends MovimientoOrigenDestino {
             }
         }
     }
-
 }

@@ -12,5 +12,4 @@ class MovimientoColumnaColumna extends MovimientoOrigenDestino {
         destino = tapete.getColumna(this.recoger("A qu� columna", Tapete.NUM_COLUMNAS));
         super.ejecutar();
     }
-
 }

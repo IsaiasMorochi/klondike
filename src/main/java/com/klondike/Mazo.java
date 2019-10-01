@@ -1,5 +1,7 @@
 package com.klondike;
 
+import com.util.GestorIO;
+
 abstract class Mazo {
 
     protected Carta[] cartas;

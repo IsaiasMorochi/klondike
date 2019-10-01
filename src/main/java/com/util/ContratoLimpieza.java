@@ -1,4 +1,5 @@
-package com.klondike;
+package com.util;
+
 
 class ContratoLimpieza {
 

@@ -1,5 +1,7 @@
 package com.klondike;
 
+import com.util.GestorIO;
+
 abstract class Opcion {
 
     protected final String titulo;

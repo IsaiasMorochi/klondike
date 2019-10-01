@@ -1,4 +1,7 @@
-package com.klondike;
+package com.tresenraya;
+
+
+import com.util.Intervalo;
 
 // Timothy Budd
 class TresEnRaya {
