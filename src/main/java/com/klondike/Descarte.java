@@ -1,55 +1,24 @@
 package com.klondike;
 
-class Descarte {
-
-    private Carta[] cartas;
-
-    private int ultima;
+class Descarte extends Mazo {
 
     public Descarte() {
-        ultima = 0;
-        cartas = new Carta[52 - 28];
+        super(52 - 28, "Descarte");
     }
 
-    private boolean vacia() {
-        return ultima == 0;
-    }
-
-    private boolean completa() {
-        return ultima == Baraja.NUM_PALOS * Baraja.NUM_NUMEROS;
-    }
-
-    public Carta sacar() {
-        assert !this.vacia();
-        ultima--;
-        return cartas[ultima];
-    }
-
-    public void poner(Carta carta) {
-        assert carta != null;
-        assert carta.bocaArriba();
-        assert !this.completa();
-        cartas[ultima] = carta;
-        ultima++;
-    }
-
-    public void mostrar() {
-        GestorIO gestorIO = new GestorIO();
-        gestorIO.out("\nDescarte: ");
-        if (this.vacia()) {
-            gestorIO.out("<VACIA>");
-        } else {
-            int primeraVisible = ultima - 3;
-            if (primeraVisible < 0) {
-                primeraVisible = 0;
-            }
-            for (int i = primeraVisible; i < ultima; i++) {
-                cartas[i].mostrar();
-            }
+    @Override
+    public void mostrarContenido() {
+        int primeraVisible = ultima - 3;
+        if (primeraVisible < 0) {
+            primeraVisible = 0;
         }
+        for (int i = primeraVisible; i < ultima; i++) {
+            cartas[i].mostrar();
+        }        
     }
 
     public void moverA(Palo palo) {
+        assert palo != null;
         if (this.vacia()) {
             new GestorIO().out("Error!!! No hay cartas en descarte");
         } else {
@@ -88,5 +57,4 @@ class Descarte {
             }
         }
     }
-
 }

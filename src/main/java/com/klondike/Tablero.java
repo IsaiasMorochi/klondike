@@ -111,7 +111,7 @@ class Tablero {
 
     public static void main(String[] args) {
         GestorIO gestorIO = new GestorIO();
-        Coordenada[][] coleccionesCoordenadas = new Coordenada[][] { 
+        Coordenada[][] coleccionesCoordenadas = new Coordenada[][]{
                 {new Coordenada(1, 1), new Coordenada(2, 1), new Coordenada(3, 1)},
                 {new Coordenada(1, 2), new Coordenada(2, 2), new Coordenada(3, 2)},
                 {new Coordenada(1, 3), new Coordenada(2, 3), new Coordenada(3, 3)},
@@ -123,7 +123,7 @@ class Tablero {
                 {new Coordenada(1, 1), new Coordenada(2, 2), new Coordenada(3, 1)},
                 {new Coordenada(1, 2), new Coordenada(2, 1), new Coordenada(3, 3)},
                 {new Coordenada(2, 3), new Coordenada(1, 2), new Coordenada(3, 2)}
-                };
+        };
         for (Coordenada[] coleccionCoordenadas : coleccionesCoordenadas) {
             gestorIO.out("----------------------------------\n");
             Tablero tablero = new Tablero();
@@ -131,7 +131,7 @@ class Tablero {
             for (Coordenada coordenada : coleccionCoordenadas) {
                 tablero.ponerFicha(coordenada, 'x');
                 tablero.mostrar();
-                gestorIO.out("Completo: " + tablero.estaCompleto(new Jugador('x')) + "\n");
+                gestorIO.out("Completo: " + tablero.estaCompleto(new Jugador('x',tablero)) + "\n");
                 gestorIO.out("Ocupada la coordenada (2,2): " + tablero.ocupada(new Coordenada(2, 2)) + "\n");
                 gestorIO.out("Ocupada la coordenada (2,2) por una x: " + tablero.ocupada(new Coordenada(2, 2), 'x') + "\n");
                 gestorIO.out("Ocupada la coordenada (2,2) por un o: " + tablero.ocupada(new Coordenada(2, 2), 'o') + "\n");
@@ -140,7 +140,7 @@ class Tablero {
             for (Coordenada coordenada : coleccionCoordenadas) {
                 tablero.retirarFicha(coordenada);
                 tablero.mostrar();
-                gestorIO.out("Completo: " + tablero.estaCompleto(new Jugador('x')) + "\n");
+                gestorIO.out("Completo: " + tablero.estaCompleto(new Jugador('x',tablero)) + "\n");
                 gestorIO.out("Ocupada la coordenada (2,2): " + tablero.ocupada(new Coordenada(2, 2)) + "\n");
                 gestorIO.out("Ocupada la coordenada (2,2) por una x: " + tablero.ocupada(new Coordenada(2, 2), 'x') + "\n");
                 gestorIO.out("Ocupada la coordenada (2,2) por un o: " + tablero.ocupada(new Coordenada(2, 2), 'o') + "\n");

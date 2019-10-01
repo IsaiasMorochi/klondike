@@ -2,128 +2,128 @@ package com.klondike;
 
 class Intervalo {
 
-	private double puntoMedio;
-	
-	private double longitud;
-	
-	private double getInferior() {
-		return puntoMedio - longitud/2;
-	}
+    private double puntoMedio;
 
-	private void setInferior(double inferior) {
-		longitud = this.getSuperior() - inferior;
-		puntoMedio = inferior + longitud/2;
-	}
+    private double longitud;
 
-	private double getSuperior() {
-		return puntoMedio + longitud/2;
-	}
+    private double getInferior() {
+        return puntoMedio - longitud / 2;
+    }
 
-	private void setSuperior(double superior) {
-		longitud = superior - this.getInferior();
-		puntoMedio = superior - longitud/2;
-	}
+    private void setInferior(double inferior) {
+        longitud = this.getSuperior() - inferior;
+        puntoMedio = inferior + longitud / 2;
+    }
 
-	public Intervalo(double inferior, double superior) {
-		this.setInferior(inferior);
-		this.setSuperior(superior);
-	}
+    private double getSuperior() {
+        return puntoMedio + longitud / 2;
+    }
 
-	public Intervalo(double superior) {
-		this(0, superior);
-	}
+    private void setSuperior(double superior) {
+        longitud = superior - this.getInferior();
+        puntoMedio = superior - longitud / 2;
+    }
 
-	public Intervalo(Intervalo intervalo) {
-		this(intervalo.getInferior(), intervalo.getSuperior());
-	}
+    public Intervalo(double inferior, double superior) {
+        this.setInferior(inferior);
+        this.setSuperior(superior);
+    }
 
-	public Intervalo() {
-		this(0, 0);
-	}
+    public Intervalo(double superior) {
+        this(0, superior);
+    }
 
-	public Intervalo clone() {
-		return new Intervalo(this);
-	}
+    public Intervalo(Intervalo intervalo) {
+        this(intervalo.getInferior(), intervalo.getSuperior());
+    }
 
-	public double longitud() {
-		return getSuperior() - getInferior();
-	}
+    public Intervalo() {
+        this(0, 0);
+    }
 
-	public void desplazar(double desplazamiento) {
-		setInferior(getInferior() + desplazamiento);
-		setSuperior(getSuperior() + desplazamiento);
-	}
+    public Intervalo clone() {
+        return new Intervalo(this);
+    }
 
-	public Intervalo desplazado(double desplazamiento) {
-		Intervalo intervalo = this.clone();
-		intervalo.desplazar(desplazamiento);
-		return intervalo;
-	}
+    public double longitud() {
+        return getSuperior() - getInferior();
+    }
 
-	public boolean incluye(double valor) {
-		return getInferior() <= valor && valor <= getSuperior();
-	}
+    public void desplazar(double desplazamiento) {
+        setInferior(getInferior() + desplazamiento);
+        setSuperior(getSuperior() + desplazamiento);
+    }
 
-	public boolean incluye(Intervalo intervalo) {
-		assert intervalo!=null;
-		return this.incluye(intervalo.getInferior()) && 
-				this.incluye(intervalo.getSuperior());
-	}
+    public Intervalo desplazado(double desplazamiento) {
+        Intervalo intervalo = this.clone();
+        intervalo.desplazar(desplazamiento);
+        return intervalo;
+    }
 
-	public boolean equals(Intervalo intervalo) {
-		assert intervalo!=null;
-		return getInferior() == intervalo.getInferior() && 
-				getSuperior() == intervalo.getSuperior();
-	}
+    public boolean incluye(double valor) {
+        return getInferior() <= valor && valor <= getSuperior();
+    }
 
-	public Intervalo interseccion(Intervalo intervalo) {
-		assert this.intersecta(intervalo);
-		if (this.incluye(intervalo)){
-			return intervalo.clone();
-		} else if (intervalo.incluye(this)){
-			return this.clone();
-		} else if (this.incluye(intervalo.getInferior())){
-			return new Intervalo(intervalo.getInferior(), getSuperior());
-		} else {
-			return new Intervalo(getInferior(), intervalo.getSuperior());
-		}
-	}
+    public boolean incluye(Intervalo intervalo) {
+        assert intervalo != null;
+        return this.incluye(intervalo.getInferior()) &&
+                this.incluye(intervalo.getSuperior());
+    }
 
-	public boolean intersecta(Intervalo intervalo) {
-		assert intervalo!=null;
-		return this.incluye(intervalo.getInferior()) ||
-				this.incluye(intervalo.getSuperior()) || 
-				intervalo.incluye(this);
-	}
+    public boolean equals(Intervalo intervalo) {
+        assert intervalo != null;
+        return getInferior() == intervalo.getInferior() &&
+                getSuperior() == intervalo.getSuperior();
+    }
 
-	public void oponer() {
-		double inferiorInicial = getInferior();
-		double superiorInicial = getSuperior();
-		setInferior(-superiorInicial);
-		setSuperior(-inferiorInicial);
-	}
+    public Intervalo interseccion(Intervalo intervalo) {
+        assert this.intersecta(intervalo);
+        if (this.incluye(intervalo)) {
+            return intervalo.clone();
+        } else if (intervalo.incluye(this)) {
+            return this.clone();
+        } else if (this.incluye(intervalo.getInferior())) {
+            return new Intervalo(intervalo.getInferior(), getSuperior());
+        } else {
+            return new Intervalo(getInferior(), intervalo.getSuperior());
+        }
+    }
 
-	public void doblar() {
-		double longitudInicial = this.longitud();
-		setInferior(getInferior() - longitudInicial / 2);
-		setSuperior(getSuperior() + longitudInicial / 2);
-	}
+    public boolean intersecta(Intervalo intervalo) {
+        assert intervalo != null;
+        return this.incluye(intervalo.getInferior()) ||
+                this.incluye(intervalo.getSuperior()) ||
+                intervalo.incluye(this);
+    }
 
-	public void recoger() {
-		GestorIO gestorIO = new GestorIO();
-		gestorIO.out("Inferior?");
-		setInferior(gestorIO.inDouble());
-		gestorIO.out("Superior?");
-		setSuperior(gestorIO.inDouble());
-	}
+    public void oponer() {
+        double inferiorInicial = getInferior();
+        double superiorInicial = getSuperior();
+        setInferior(-superiorInicial);
+        setSuperior(-inferiorInicial);
+    }
 
-	public void mostrar() {
-		new GestorIO().out("[" + getInferior() + "," + getSuperior() + "]");
-	}
+    public void doblar() {
+        double longitudInicial = this.longitud();
+        setInferior(getInferior() - longitudInicial / 2);
+        setSuperior(getSuperior() + longitudInicial / 2);
+    }
 
-	public Intervalo[] trocear(int trozos) {
-		return null;
-	}
-	
+    public void recoger() {
+        GestorIO gestorIO = new GestorIO();
+        gestorIO.out("Inferior?");
+        setInferior(gestorIO.inDouble());
+        gestorIO.out("Superior?");
+        setSuperior(gestorIO.inDouble());
+    }
+
+    public void mostrar() {
+        new GestorIO().out("[" + getInferior() + "," + getSuperior() + "]");
+    }
+
+    public Intervalo[] trocear(int trozos) {
+        return null;
+    }
+
 }
 

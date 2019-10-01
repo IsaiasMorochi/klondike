@@ -9,7 +9,7 @@ class Klondike {
     private Palo[] palos;
 
     private Columna[] columnas;
-    
+
     private static final int NUM_COLUMNAS = 7;
 
     private Klondike() {
@@ -33,74 +33,74 @@ class Klondike {
             menu.mostrar();
             opcion = menu.getOpcion();
             switch (opcion) {
-            case 1:
-                baraja.moverA(descarte);
-                break;
-            case 2:
-                descarte.moverA(this.recogerPalo("A"));
-                break;
-            case 3:
-                descarte.moverA(this.recogerColumna("A"));
-                break;
-            case 4:
-                this.recogerPalo("De").moverA(this.recogerColumna("A"));
-                break;
-            case 5:
-                this.recogerColumna("De").moverA(this.recogerPalo("A"));
-                break;
-            case 6:
-                this.recogerColumna("De").moverA(this.recogerColumna("A"));
-                break;
-            case 7:
-                this.recogerColumna("De").voltear();
-                break;
-            case 8:
-                descarte.voltear(baraja);
-                break;
-            case 9:
-                break;
+                case 1:
+                    baraja.moverA(descarte);
+                    break;
+                case 2:
+                    descarte.moverA(this.recogerPalo("A"));
+                    break;
+                case 3:
+                    descarte.moverA(this.recogerColumna("A"));
+                    break;
+                case 4:
+                    this.recogerPalo("De").moverA(this.recogerColumna("A"));
+                    break;
+                case 5:
+                    this.recogerColumna("De").moverA(this.recogerPalo("A"));
+                    break;
+                case 6:
+                    this.recogerColumna("De").moverA(this.recogerColumna("A"));
+                    break;
+                case 7:
+                    this.recogerColumna("De").voltear();
+                    break;
+                case 8:
+                    descarte.voltear(baraja);
+                    break;
+                case 9:
+                    break;
             }
         } while (opcion != 9);
     }
-    
-    private Palo recogerPalo(String prefijo){
+
+    private Palo recogerPalo(String prefijo) {
         GestorIO gestorIO = new GestorIO();
         int palo;
         boolean error;
         do {
-            gestorIO.out("�" + prefijo + " que palo? [1-"+ Baraja.NUM_PALOS + "]: ");
+            gestorIO.out("�" + prefijo + " que palo? [1-" + Baraja.NUM_PALOS + "]: ");
             palo = gestorIO.inInt();
-            error = !new Intervalo(1,Baraja.NUM_PALOS).incluye(palo);
-            if (error){
-                gestorIO.out("Error!!! Debe ser un numero entre 1 y "+ Baraja.NUM_PALOS);
+            error = !new Intervalo(1, Baraja.NUM_PALOS).incluye(palo);
+            if (error) {
+                gestorIO.out("Error!!! Debe ser un numero entre 1 y " + Baraja.NUM_PALOS);
             }
-        } while(error);
-        return palos[palo-1];
+        } while (error);
+        return palos[palo - 1];
     }
-    
-    private Columna recogerColumna(String prefijo){
+
+    private Columna recogerColumna(String prefijo) {
         GestorIO gestorIO = new GestorIO();
         int columna;
         boolean error;
         do {
-            gestorIO.out("�" + prefijo + " que columna? [1-"+ NUM_COLUMNAS + "]: ");
+            gestorIO.out("�" + prefijo + " que columna? [1-" + NUM_COLUMNAS + "]: ");
             columna = gestorIO.inInt();
-            error = !new Intervalo(1,NUM_COLUMNAS).incluye(columna);
-            if (error){
-                gestorIO.out("Error!!! Debe ser un numero entre 1 y "+ NUM_COLUMNAS);
+            error = !new Intervalo(1, NUM_COLUMNAS).incluye(columna);
+            if (error) {
+                gestorIO.out("Error!!! Debe ser un numero entre 1 y " + NUM_COLUMNAS);
             }
-        } while(error);
-        return columnas[columna-1];
+        } while (error);
+        return columnas[columna - 1];
     }
 
     private void mostrar() {
         baraja.mostrar();
         descarte.mostrar();
-        for (int i = 0; i < palos.length; i++) {
-            palos[i].mostrar();
+        for (Palo palo : palos) {
+            palo.mostrar();
         }
-        for (int i = 0; i < columnas.length; i++) {
-            columnas[i].mostrar();
+        for (Columna columna : columnas) {
+            columna.mostrar();
         }
     }
 

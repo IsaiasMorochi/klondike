@@ -1,17 +1,9 @@
 package com.klondike;
 
-class Columna {
-
-    private Carta[] cartas;
-
-    private int ultima;
-
-    private int posicion;
+class Columna extends Mazo {
 
     public Columna(int posicion, Baraja baraja) {
-        this.posicion = posicion;
-        ultima = 0;
-        cartas = new Carta[posicion + Baraja.NUM_NUMEROS - 1];
+        super(posicion + Baraja.NUM_NUMEROS - 1, "Columna" + posicion);
         for (int i = 0; i < posicion; i++) {
             Carta carta = baraja.sacar();
             if (i == posicion - 1) {
@@ -21,42 +13,11 @@ class Columna {
         }
     }
 
-    private boolean vacia() {
-        return ultima == 0;
-    }
-
-    private boolean completa() {
-        return ultima == Baraja.NUM_NUMEROS;
-    }
-
-    private Carta cima() {
-        assert !this.vacia();
-        return cartas[ultima - 1];
-    }
-
-    public Carta sacar() {
-        assert !this.vacia();
-        ultima--;
-        return cartas[ultima];
-    }
-
-    public void poner(Carta carta) {
-        assert carta != null;
-        assert !this.completa();
-        cartas[ultima] = carta;
-        ultima++;
-    }
-
-    public void mostrar() {
-        GestorIO gestorIO = new GestorIO();
-        gestorIO.out("\nColumna " + posicion + ": ");
-        if (this.vacia()) {
-            gestorIO.out("<VACIA>");
-        } else {
-            for (int i = 0; i < ultima; i++) {
-                cartas[i].mostrar();
-            }
-        }
+    @Override
+    public void mostrarContenido() {
+        for (int i = 0; i < ultima; i++) {
+            cartas[i].mostrar();
+        }        
     }
 
     public void moverA(Palo palo) {
@@ -104,5 +65,4 @@ class Columna {
                 this.cima().siguiente(carta) && 
                 this.cima().distintoColor(carta);
     }
-
 }

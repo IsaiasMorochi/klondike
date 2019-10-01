@@ -77,5 +77,4 @@ class Coordenada {
         }       
         return -1;
     }
-
 }

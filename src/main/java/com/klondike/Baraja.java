@@ -2,19 +2,14 @@ package com.klondike;
 
 import java.util.Random;
 
-class Baraja {
-
-    private Carta[] cartas;
-
-    private int ultima;
+class Baraja extends Mazo {
 
     public static final int NUM_PALOS = 4;
 
     public static final int NUM_NUMEROS = 13;
 
     public Baraja() {
-        ultima = 0;
-        cartas = new Carta[NUM_PALOS * NUM_NUMEROS];
+        super(NUM_PALOS * NUM_NUMEROS, "Baraja");
         for (int i = 0; i < NUM_PALOS; i++) {
             for (int j = 0; j < NUM_NUMEROS; j++) {
                 this.poner(new Carta(i, j));
@@ -22,8 +17,8 @@ class Baraja {
         }
         this.barajar();
     }
-    
-    private void barajar(){
+
+    private void barajar() {
         Random aleatorio = new Random();
         for (int i = 0; i < 1000; i++) {
             int origen = aleatorio.nextInt(NUM_PALOS * NUM_NUMEROS);
@@ -34,41 +29,9 @@ class Baraja {
         }
     }
 
-    private boolean vacia() {
-        return ultima == 0;
-    }
-
-    private boolean completa() {
-        return ultima == NUM_PALOS * NUM_NUMEROS;
-    }
-
-    private Carta cima() {
-        assert !this.vacia();
-        return cartas[ultima - 1];
-    }
-
-    public Carta sacar() {
-        assert !this.vacia();
-        ultima--;
-        return cartas[ultima];
-    }
-
-    public void poner(Carta carta) {
-        assert carta != null;
-        assert !carta.bocaArriba();
-        assert !this.completa();
-        cartas[ultima] = carta;
-        ultima++;
-    }
-
-    public void mostrar() {
-        GestorIO gestorIO = new GestorIO();
-        gestorIO.out("\nBaraja: ");
-        if (this.vacia()) {
-            gestorIO.out("<VACIA>");
-        } else {
-            this.cima().mostrar();
-        }
+    @Override
+    public void mostrarContenido() {
+        this.cima().mostrar();
     }
 
     public void moverA(Descarte descarte) {
@@ -96,5 +59,4 @@ class Baraja {
             carta.mostrar();
         }
     }
-
 }

@@ -4,8 +4,11 @@ class Jugador {
 
     private char color;
 
-    public Jugador(char color) {
+    private Tablero tablero;
+
+    public Jugador(char color, Tablero tablero) {
         assert color == 'x' || color == 'o';
+        this.tablero = tablero;
         this.color = color;
     }
 
@@ -42,7 +45,7 @@ class Jugador {
             return "Coordenada ocupada en el tablero";
         }
         if (coordenadaRepetida != null && coordenadaRepetida.igual(coordenada)) {
-            return "No se puede poner de donde se quito la ficha";
+            return "No se puede poner de donde se quit� la ficha";
         }
         return "";
     }
@@ -55,7 +58,7 @@ class Jugador {
         tablero.retirarFicha(retirada);
         this.ponerFicha(tablero, retirada);
     }
-    
+
     private Coordenada recogerCoordenadaRetiradaValida(Tablero tablero) {
         Coordenada resultado = new Coordenada();
         String error = "";
@@ -68,7 +71,7 @@ class Jugador {
         } while (!error.equals(""));
         return resultado;
     }
-    
+
     private String errorRetirada(Tablero tablero, Coordenada coordenada) {
         if (!tablero.ocupada(coordenada, color)) {
             return "Coordenada no ocupada en el tablero por una ficha " + color;
@@ -80,19 +83,19 @@ class Jugador {
         new GestorIO().out("eoeoeoeoeoeoeoeoe! los " + color + " son lo mejores\n");
 
     }
-    
-    public static void main(String[] args){
-        Jugador jugador = new Jugador('o');
-        jugador.cantaVictoria();
-        Tablero tablero = new Tablero();
-        for (int i = 0; i < 3; i++) {
-            jugador.ponerFicha(tablero);
-            tablero.mostrar();
-        }
-        for (int i = 0; i < 3; i++) {
-            jugador.moverFicha(tablero);
-            tablero.mostrar();
-        }
+
+    public static void main(String[] args) {
+//        Jugador jugador = new Jugador('o');
+//        jugador.cantaVictoria();
+//        Tablero tablero = new Tablero();
+//        for (int i = 0; i < 3; i++) {
+//            jugador.ponerFicha(tablero);
+//            tablero.mostrar();
+//        }
+//        for (int i = 0; i < 3; i++) {
+//            jugador.moverFicha(tablero);
+//            tablero.mostrar();
+//        }
     }
 
 }

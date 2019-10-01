@@ -113,11 +113,6 @@ class Carta {
             gestorIO.out("\nSon de distinto color? " + parCartas[0].distintoColor(parCartas[1]));
             gestorIO.out("\n");
         }
-        
-        
-        
-        
     }
-
 }
 

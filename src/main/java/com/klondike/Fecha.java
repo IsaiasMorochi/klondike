@@ -65,7 +65,7 @@ class Fecha {
 	}
 	
 	public void mostrar(){
-		new GestorIO().out(dia+"/"+mes+"/" + año);
+		new GestorIO().out(dia+"/"+mes+"/"+año);
 		
 	}
 
@@ -107,7 +107,7 @@ class Fecha {
 	}
 	
 	public static boolean bisiesto(int año){
-		return año % 4 == 0 && año % 100 !=0 || año % 400 == 0;
+		return año%4 == 0 && año%100!=0 || año%400==0;
 	}
 	
 	public static int diasAño(int año){
