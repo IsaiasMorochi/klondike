@@ -14,47 +14,12 @@ class Descarte extends Mazo {
         }
         for (int i = primeraVisible; i < ultima; i++) {
             cartas[i].mostrar();
-        }        
-    }
-
-    public void moverA(Palo palo) {
-        assert palo != null;
-        if (this.vacia()) {
-            new GestorIO().out("Error!!! No hay cartas en descarte");
-        } else {
-            Carta carta = this.sacar();
-            if (palo.apilable(carta)) {
-                palo.poner(carta);
-            } else {
-                this.poner(carta);
-                new GestorIO().out("Error!!! No se puede realizar ese movimiento");
-            }
         }
     }
 
-    public void moverA(Columna columna) {
-        if (this.vacia()) {
-            new GestorIO().out("Error!!! No hay cartas en descarte");
-        } else {
-            Carta carta = this.sacar();
-            if (columna.apilable(carta)) {
-                columna.poner(carta);
-            } else {
-                this.poner(carta);
-                new GestorIO().out("Error!!! No se puede realizar ese movimiento");
-            }
-        }
+    @Override
+    public boolean apilable(Carta carta) {
+        return true;
     }
 
-    public void voltear(Baraja baraja) {
-        if (this.vacia()) {
-            new GestorIO().out("Error!!! No hay cartas en descarte");
-        } else {
-            while (!this.vacia()) {
-                Carta carta = this.sacar();
-                carta.voltear();
-                baraja.poner(carta);
-            }
-        }
-    }
 }

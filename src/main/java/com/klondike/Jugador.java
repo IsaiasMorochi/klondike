@@ -1,101 +1,48 @@
 package com.klondike;
 
-class Jugador {
+abstract class Jugador {
 
-    private char color;
+    protected char color;
 
-    private Tablero tablero;
+    protected Tablero tablero;
 
-    public Jugador(char color, Tablero tablero) {
-        assert color == 'x' || color == 'o';
-        this.tablero = tablero;
+    protected Jugador(char color, Tablero tablero) {
+        assert color == 'o' || color == 'x';
+        assert tablero != null;
         this.color = color;
+        this.tablero = tablero;
     }
 
     public char color() {
         return color;
     }
 
-    public void ponerFicha(Tablero tablero) {
-        assert tablero != null;
-        assert !tablero.estaCompleto(this);
-        this.ponerFicha(tablero, null);
+    public void ponerFicha() {
+        assert !tablero.estaCompleto(this.color());
+        this.ponerFicha(null);
     }
 
-    private void ponerFicha(Tablero tablero, Coordenada coordenadaRepetida) {
-        new GestorIO().out("Pone el jugador con " + color + "\n");
-        tablero.ponerFicha(this.recogerCoordenadaPuestaValida(tablero, coordenadaRepetida), color);
-    }
-
-    private Coordenada recogerCoordenadaPuestaValida(Tablero tablero, Coordenada coordenadaRepetida) {
-        Coordenada resultado = new Coordenada();
-        String error = "";
-        do {
-            resultado.recoger();
-            error = this.errorPuesta(tablero, resultado, coordenadaRepetida);
-            if (!error.equals("")) {
-                new GestorIO().out("Error!!! " + error + "\n");
-            }
-        } while (!error.equals(""));
-        return resultado;
-    }
-
-    private String errorPuesta(Tablero tablero, Coordenada coordenada, Coordenada coordenadaRepetida) {
-        if (tablero.ocupada(coordenada)) {
-            return "Coordenada ocupada en el tablero";
+    protected void ponerFicha(CoordenadaTresEnRaya coordenadaProhibida) {
+        if (coordenadaProhibida == null) {
+            new GestorIO().out("Pone el jugador con " + color + "\n");
         }
-        if (coordenadaRepetida != null && coordenadaRepetida.igual(coordenada)) {
-            return "No se puede poner de donde se quit� la ficha";
-        }
-        return "";
+        tablero.ponerFicha(this.recogerCoordenadaPuestaValida(coordenadaProhibida), color);
     }
 
-    public void moverFicha(Tablero tablero) {
-        assert tablero != null;
-        assert tablero.estaCompleto(this);
+    protected abstract CoordenadaTresEnRaya recogerCoordenadaPuestaValida(CoordenadaTresEnRaya coordenadaProhibida);
+
+    public void moverFicha() {
+        assert tablero.estaCompleto(this.color());
         new GestorIO().out("Mueve el jugador con " + color + "\n");
-        Coordenada retirada = this.recogerCoordenadaRetiradaValida(tablero);
+        CoordenadaTresEnRaya retirada = this.recogerCoordenadaRetiradaValida();
         tablero.retirarFicha(retirada);
-        this.ponerFicha(tablero, retirada);
+        this.ponerFicha(retirada);
     }
 
-    private Coordenada recogerCoordenadaRetiradaValida(Tablero tablero) {
-        Coordenada resultado = new Coordenada();
-        String error = "";
-        do {
-            resultado.recoger();
-            error = this.errorRetirada(tablero, resultado);
-            if (!error.equals("")) {
-                new GestorIO().out("Error!!! " + error + "\n");
-            }
-        } while (!error.equals(""));
-        return resultado;
-    }
-
-    private String errorRetirada(Tablero tablero, Coordenada coordenada) {
-        if (!tablero.ocupada(coordenada, color)) {
-            return "Coordenada no ocupada en el tablero por una ficha " + color;
-        }
-        return "";
-    }
+    protected abstract CoordenadaTresEnRaya recogerCoordenadaRetiradaValida();
 
     public void cantaVictoria() {
         new GestorIO().out("eoeoeoeoeoeoeoeoe! los " + color + " son lo mejores\n");
-
-    }
-
-    public static void main(String[] args) {
-//        Jugador jugador = new Jugador('o');
-//        jugador.cantaVictoria();
-//        Tablero tablero = new Tablero();
-//        for (int i = 0; i < 3; i++) {
-//            jugador.ponerFicha(tablero);
-//            tablero.mostrar();
-//        }
-//        for (int i = 0; i < 3; i++) {
-//            jugador.moverFicha(tablero);
-//            tablero.mostrar();
-//        }
     }
 
 }

@@ -1,41 +1,51 @@
 package com.klondike;
 
-public class Menu {
+class Menu {
 
-    private static final String[] TITULOS = new String[]{
-            "\n1. Mover de baraja a descarte",
-            "\n2. Mover de descarte a palo",
-            "\n3. Mover de descarte a columna",
-            "\n4. Mover de palo a columna",
-            "\n5. Mover de columna a palo",
-            "\n6. Mover de columna a columna",
-            "\n7. Voltear carta en columna",
-            "\n8. Voltear descarte en baraja",
-            "\n9. Salir"
-    };
+    private Opcion[] opciones;
 
-    private static final Intervalo OPCIONES = new Intervalo(1, 9);
+    private int cantidad;
+
+    private Salir salir;
+
+    public Menu() {
+        opciones = new Opcion[100];
+        cantidad = 0;
+        salir = new Salir();
+    }
+
+    public void añadir(Opcion opcion) {
+        opciones[cantidad] = opcion;
+        cantidad++;
+    }
+
+    public void cerrar() {
+        this.añadir(salir);
+    }
 
     public void mostrar() {
-        GestorIO gestorIO = new GestorIO();
-        for (String titulo : TITULOS) {
-            gestorIO.out(titulo);
+        for (int i = 0; i < cantidad; i++) {
+            opciones[i].mostar(i + 1);
         }
     }
 
-    public int getOpcion() {
+    public Opcion getOpcion() {
         GestorIO gestorIO = new GestorIO();
         int opcion;
         boolean error;
         do {
-            gestorIO.out("\nOpcion? [1-9]: ");
+            gestorIO.out("\nOpci�n? [1-" + cantidad + "]: ");
             opcion = gestorIO.inInt();
-            error = !OPCIONES.incluye(opcion);
+            error = !new Intervalo(1, cantidad).incluye(opcion);
             if (error) {
-                gestorIO.out("Error!!! La opcion debe ser entre 1 y 9");
+                gestorIO.out("Error!!! La opci�n debe ser entre 1 y 9");
             }
         } while (error);
-        return opcion;
+        return opciones[opcion - 1];
+    }
+
+    public boolean terminado() {
+        return salir.ejecutada();
     }
 
 }

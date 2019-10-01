@@ -34,29 +34,9 @@ class Baraja extends Mazo {
         this.cima().mostrar();
     }
 
-    public void moverA(Descarte descarte) {
-        if (this.vacia()) {
-            new GestorIO().out("Error!!! No hay cartas en baraja");
-        } else {
-            int contador = 3;
-            while (contador > 0 && !this.vacia()) {
-                Carta carta = this.sacar();
-                carta.voltear();
-                descarte.poner(carta);
-                contador--;
-            }
-        }
+    @Override
+    public boolean apilable(Carta carta) {
+        return true;
     }
 
-    public static void main(String[] args) {
-        GestorIO gestorIO = new GestorIO();
-        Baraja baraja = new Baraja();
-        for (int i = 0; i < 47; i++) {
-            gestorIO.out("\nCompleto? " + baraja.completa());
-            gestorIO.out("\nVacia? " + baraja.vacia());
-            Carta carta = baraja.sacar();
-            carta.voltear();
-            carta.mostrar();
-        }
-    }
 }

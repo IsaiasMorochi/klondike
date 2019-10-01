@@ -14,6 +14,10 @@ abstract class Mazo {
         this.titulo = titulo;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
     protected boolean vacia() {
         return ultima == 0;
     }
@@ -52,4 +56,7 @@ abstract class Mazo {
     }
 
     public abstract void mostrarContenido();
+
+    public abstract boolean apilable(Carta carta);
+
 }

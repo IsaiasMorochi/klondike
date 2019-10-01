@@ -11,20 +11,7 @@ class Palo extends Mazo {
         this.cima().mostrar();
     }
 
-    public void moverA(Columna columna) {
-        if (this.vacia()) {
-            new GestorIO().out("Error!!! No hay cartas en palo");
-        } else {
-            Carta carta = this.sacar();
-            if (columna.apilable(carta)) {
-                columna.poner(carta);
-            } else {
-                this.poner(carta);
-                new GestorIO().out("Error!!! No se puede realizar ese movimiento");
-            }
-        }
-    }
-
+    @Override
     public boolean apilable(Carta carta) {
         assert carta != null;
         return this.vacia() && carta.esAs() ||
